@@ -18,9 +18,9 @@ namespace BeanGame
 
             GameCharacterSave save = new GameCharacterSave();
 
-            save.BaseHealth = c.baseHealth;
             save.CharacterName = c.characterName;
             save.CharacterID = c.characterID;
+            save.BaseHealth = c.baseHealth;
 
             File.WriteAllText(
                 Path.Combine(GameStrings.SavesLocation, $"SAVE_{ c.characterID }.bgsave"), 

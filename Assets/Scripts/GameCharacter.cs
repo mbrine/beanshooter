@@ -10,5 +10,7 @@ namespace BeanGame
 		[Header("Game Stats")]
 		public float      baseHealth;
 		public float      currentHealth;
+
+		public GameWeapon currentWeapon;
 	}
 }

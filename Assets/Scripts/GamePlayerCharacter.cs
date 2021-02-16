@@ -8,7 +8,8 @@ namespace BeanGame
 		[Header("File Stats")]
 		public int        characterID;
 		public string     characterName;
-		
+		public int        characterActionSkill;
+
 		
 	}
 }
