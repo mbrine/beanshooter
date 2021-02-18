@@ -2,14 +2,18 @@
 
 namespace BeanGame
 {
-	[RequireComponent(typeof(GameCharacter))]
 	public class GamePlayerCharacter : GameCharacter
 	{
 		[Header("File Stats")]
 		public int        characterID;
 		public string     characterName;
-		public int        characterActionSkill;
 
+		public int        characterActionSkill;
+		public bool       characterActionSkillActive = false;
+		
+		// have connections here?
+		
+		
 		
 	}
 }

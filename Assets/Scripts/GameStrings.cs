@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace BeanGame
@@ -8,5 +9,6 @@ namespace BeanGame
 		public static string GameName => "BeanGame";
 		private static string MyGamesFolder => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games");
 		public static string SavesLocation => Path.Combine(MyGamesFolder, GameName, "Saves");
+
 	}
 }

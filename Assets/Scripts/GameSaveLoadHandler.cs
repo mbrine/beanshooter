@@ -9,7 +9,7 @@ namespace BeanGame
 {
     public static class GameSaveLoadHandler
     {
-        public static bool SaveToon(GamePlayerCharacter c)
+        public static bool SavePlayerCharacter(GamePlayerCharacter c)
         {
             if (c == null) return false;
 
@@ -28,12 +28,7 @@ namespace BeanGame
             return true;
         }
 
-        public static List<string> GetListOfCharacters()
-        {
-            return new List<string>();
-        }
-
-        public static GamePlayerCharacter LoadToon(this GameObject go, string directory)
+        public static GamePlayerCharacter LoadPlayerCharacter(this GameObject go, string directory)
         {
             try
             {
@@ -52,6 +47,20 @@ namespace BeanGame
                 
                 return null;
             }
+        }
+
+        public static List<string> GetListOfCharacters()
+        {
+            DirectoryInfo dir = new DirectoryInfo(GameStrings.SavesLocation);
+            FileInfo[] files = dir.GetFiles("*.bgsave");
+            List<string> charNames = new List<string>();
+            foreach (var file in files)
+            {
+                string input = File.ReadAllText(file.ToString()); 
+                GameCharacterSave save = JsonUtility.FromJson<GameCharacterSave>(input);
+                charNames.Add(save.CharacterName);
+            }
+            return charNames;
         }
     }
 }
