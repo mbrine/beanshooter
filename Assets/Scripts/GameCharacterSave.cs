@@ -8,7 +8,8 @@ namespace BeanGame
 	{
 		[SerializeField] public int        CharacterID;
 		[SerializeField] public string     CharacterName;
-		
+		[SerializeField] public int        CharacterActionSkill;
+
 		[SerializeField] public float      BaseHealth;
 	}
 }
