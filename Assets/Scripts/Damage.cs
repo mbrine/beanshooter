@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BeanGame
 {
-	public class GameDamage
+	public class Damage
 	{
-		
+		public float value;
 	}
 }

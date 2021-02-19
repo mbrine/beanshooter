@@ -25,7 +25,7 @@ public class SaveTester : EditorWindow
 			GamePlayerCharacter c = go.AddComponent<GamePlayerCharacter>();
 			c.characterID = 1;
 			c.characterName = characterName;
-			c.baseHealth = 100;
+			c.BaseHealth = 100;
 			GameSaveLoadHandler.SavePlayerCharacter(c);
 			DestroyImmediate(go);
 		}

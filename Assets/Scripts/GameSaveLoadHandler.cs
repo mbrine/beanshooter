@@ -20,7 +20,7 @@ namespace BeanGame
 
             save.CharacterName = c.characterName;
             save.CharacterID = c.characterID;
-            save.BaseHealth = c.baseHealth;
+            save.BaseHealth = c.BaseHealth;
 
             File.WriteAllText(
                 Path.Combine(GameStrings.SavesLocation, $"SAVE_{ c.characterID }.bgsave"), 
@@ -38,7 +38,7 @@ namespace BeanGame
                 
                 temp.characterName = save.CharacterName;
                 temp.characterID = save.CharacterID;
-                temp.baseHealth = save.BaseHealth;
+                temp.BaseHealth = save.BaseHealth;
                 
                 return temp;
             }
