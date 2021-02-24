@@ -12,13 +12,13 @@ namespace BeanGame
 		}
 		
 		[Header("Player Stats")]
-		public int                          characterID;
-		public string                       characterName;
+		public int                             characterID;
+		public string                          characterName;
 
-		public int                          characterActionSkill;
-		public bool                         characterActionSkillActive = false;
+		public int                             characterActionSkill;
+		public bool                            characterActionSkillActive = false;
 
-		public GamePlayerCharacterInventory characterInventory;
+		public PlayerInventory                 characterInventory;
 
 
 
