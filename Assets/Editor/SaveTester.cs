@@ -49,5 +49,33 @@ public class SaveTester : EditorWindow
 				GUILayout.Label(a);	
 			}
 		}
+
+		if (GUILayout.Button("wepaon"))
+		{
+			GameObject go = new GameObject("weap");
+			var a = go.AddComponent<GameItemComponentWrapper>();
+			a.theItem = GameplayController.GenerateWeapon(0);
+
+		}
+
+		if (GUILayout.Button("char"))
+		{
+			GameObject go = new GameObject("char");
+			var gc = go.AddComponent<GameCharacter>();
+			Looks l = AssetDatabase.LoadAssetAtPath<Looks>("Assets/Resources/New Look.asset");
+			gc.looksBase = l;
+			gc.ApplyLooks();
+		}
+
+		if (Selection.activeGameObject != null)
+		{
+			if (Selection.activeGameObject.GetComponent<GameCharacter>() != null)
+			{
+				if (GUILayout.Button("reapply"))
+				{
+					Selection.activeGameObject.GetComponent<GameCharacter>().ApplyLooks();
+				}
+			}	
+		}
 	}
 }

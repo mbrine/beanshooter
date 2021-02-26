@@ -3,12 +3,15 @@ using UnityEngine;
 
 namespace BeanGame
 {
-	[CreateAssetMenu(fileName = "Game Weapon", menuName = "BeanGame/New Game Weapon")]
-	public class Weapon : ScriptableObject
+	[CreateAssetMenu(fileName = "New Game Weapon", menuName = "BeanGame/Weapon", order = 0)]
+	public class Weapon : GameItem
 	{
-		public string            WeaponName;
-		public Damage            WeaponDamage;
-		public List<WeaponPart>  WeaponParts;
+		public Damage            weaponDamage;
+		public List<WeaponPart>  weaponParts;
+
+		public GameItem          weaponBaseItem;
+
+		public Looks             weaponLooks;
 		
 		void Fire()
 		{
