@@ -46,7 +46,12 @@ namespace BeanGame
 				return;
 			if (currentHealth - d.value < 0)
 			{
+				currentHealth = 0f;
 				isDead = true;
+			}
+			else
+			{
+				currentHealth -= d.value;
 			}
 		}
 
