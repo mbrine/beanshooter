@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91bfe795b17a4e2e94092315d978dd8d, type: 3}
   m_Name: New Look
   m_EditorClassIdentifier: 
-  lookType: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
+  lookType: 1
+  mesh: {fileID: 4300000, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
+  material: {fileID: 2100006, guid: 47616bd0cda748d4cbedcfc908506b9d, type: 3}
   offset: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0, w: 0}
   scale: {x: 0, y: 0, z: 0}
