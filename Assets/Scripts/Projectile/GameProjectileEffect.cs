@@ -17,10 +17,12 @@ namespace BeanGame
 		}
 
 		// most effective when the projectile is slow moving
+        // Should we ignore this when the bullet is hitscan? -matt
 
 		public enum WhileTraveling
 		{
 			DEFAULT_TRAVEL,
+            ARC_TRAVEL,
 		}
 
 		public enum OnHit
