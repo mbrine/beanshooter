@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91bfe795b17a4e2e94092315d978dd8d, type: 3}
-  m_Name: New Look
+  m_Name: wings
   m_EditorClassIdentifier: 
-  lookType: 1
-  mesh: {fileID: 4300000, guid: e3ae06a3979f53046aa05330d69de1fa, type: 3}
-  material: {fileID: 2100006, guid: 47616bd0cda748d4cbedcfc908506b9d, type: 3}
-  offset: {x: 0, y: 0, z: 0}
+  lookType: 4
+  mesh: {fileID: -2432090755550338912, guid: 8f3402bb1e448a046a995c1c75ddc795, type: 3}
+  material: {fileID: 2100000, guid: 675392f879b7b5342b8a6925794a2cdf, type: 2}
+  offset: {x: 0, y: 0, z: -0.4}
   rotation: {x: 0, y: 0, z: 0, w: 0}
-  scale: {x: 0, y: 0, z: 0}
+  scale: {x: 1, y: 1, z: 1}
+  isBillboard: 0
+  billboardTexture: {fileID: 0}
+  castShadow: 1

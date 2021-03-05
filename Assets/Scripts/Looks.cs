@@ -18,12 +18,17 @@ namespace BeanGame
 			WEAPON_PROJECTILE,
 		}
 
-		public LookType      lookType;
-		public Mesh          mesh;
-		public Material      material;
-		public Vector3       offset;
-		public Quaternion    rotation;
-		public Vector3       scale;
+		public LookType       lookType;
+		public Mesh           mesh;
+		public Material       material;
+		public Vector3        offset;
+		public Quaternion     rotation;
+		public Vector3        scale;
+
+		public bool           isBillboard;
+		public Texture        billboardTexture;
+
+		public bool           castShadow = true;
 	}
 
 }

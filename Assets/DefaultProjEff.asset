@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873152408bc14733ae78da28e249317b, type: 3}
-  m_Name: eff
+  m_Script: {fileID: 11500000, guid: fac7ee6ac43e4601bfc55ced2448a5d7, type: 3}
+  m_Name: DefaultProjEff
   m_EditorClassIdentifier: 
+  onFireEffect: 0
+  whileTravelingEffect: 0
+  onHitEffect: 0

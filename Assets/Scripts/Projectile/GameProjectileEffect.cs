@@ -14,6 +14,7 @@ namespace BeanGame
 		{
 			DEFAULT_FIRE,
 			HITSCAN,
+			SPLIT,
 		}
 
 		// most effective when the projectile is slow moving
@@ -21,18 +22,24 @@ namespace BeanGame
 		public enum WhileTraveling
 		{
 			DEFAULT_TRAVEL,
+			SPLIT,
+			GAIN_WEIGHT, // GOTTA SET PARAMS FOR THIS SOME HOW
+			
 		}
 
 		public enum OnHit
 		{
 			DEFAULT_HIT,
 			EXPLODE,
-			CHANCE_SET_FIRE,	
-			
+			CHANCE_SET_FIRE,
 		}
 
 		public OnFired        onFireEffect;
 		public WhileTraveling whileTravelingEffect;
 		public OnHit          onHitEffect;
+
+		public float FiredValue;
+		public float TravelValue;
+		public float HitValue;
 	}
 }

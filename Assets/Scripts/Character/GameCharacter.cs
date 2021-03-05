@@ -87,13 +87,18 @@ namespace BeanGame
 					looksComponentPart1 = new GameObject("lp1").AddComponent<LooksComponent>();
 					looksComponentPart1.transform.SetParent(transform);
 				}
-				looksComponentPart1.appliedLook = looksPart1;
+				looksComponentPart1.AppliedLook = looksPart1;
+				
 			}
 			else
 			{
 				if (looksComponentPart1 != null)
 				{
+#if UNITY_EDITOR
+					DestroyImmediate(looksComponentPart1.gameObject);
+#else
 					Destroy(looksComponentPart1.gameObject);
+#endif
 					looksComponentPart1 = null;
 				}
 			}
@@ -105,13 +110,17 @@ namespace BeanGame
 					looksComponentPart2 = new GameObject("lp2").AddComponent<LooksComponent>();
 					looksComponentPart2.transform.SetParent(transform);
 				}
-				looksComponentPart2.appliedLook = looksPart2;
+				looksComponentPart2.AppliedLook = looksPart2;
 			}
 			else
 			{
 				if (looksComponentPart2 != null)
 				{
+#if UNITY_EDITOR
+					DestroyImmediate(looksComponentPart2.gameObject);
+#else
 					Destroy(looksComponentPart2.gameObject);
+#endif
 					looksComponentPart2 = null;
 				}
 			}
@@ -123,13 +132,17 @@ namespace BeanGame
 					looksComponentPart3 = new GameObject("lp3").AddComponent<LooksComponent>();
 					looksComponentPart3.transform.SetParent(transform);
 				}
-				looksComponentPart3.appliedLook = looksPart3;
+				looksComponentPart3.AppliedLook = looksPart3;
 			}
 			else
 			{
 				if (looksComponentPart3 != null)
 				{
+#if UNITY_EDITOR
+					DestroyImmediate(looksComponentPart3.gameObject);
+#else
 					Destroy(looksComponentPart3.gameObject);
+#endif
 					looksComponentPart3 = null;
 				}
 			}

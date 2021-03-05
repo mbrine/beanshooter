@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BeanGame
 {
@@ -12,5 +13,22 @@ namespace BeanGame
 
 		public GameProjectileEffect projectileEffect;
 
+		public void WakeProjectile()
+		{
+			// TO BE CALLED FROM THE WEAPON ITSELF
+			switch (projectileEffect.onFireEffect)
+			{
+				case GameProjectileEffect.OnFired.HITSCAN:
+				{
+					// TODO: RAYCAST FROM HERE
+					break;
+				}
+			}
+		}
+
+		public void OnTriggerEnter(Collider other)
+		{
+			
+		}
 	}
 }
