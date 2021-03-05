@@ -18,6 +18,7 @@ namespace BeanGame
 		}
 
 		// most effective when the projectile is slow moving
+        // Should we ignore this when the bullet is hitscan? -matt
 
 		public enum WhileTraveling
 		{
@@ -25,6 +26,7 @@ namespace BeanGame
 			SPLIT,
 			GAIN_WEIGHT, // GOTTA SET PARAMS FOR THIS SOME HOW
 			
+            ARC_TRAVEL,
 		}
 
 		public enum OnHit

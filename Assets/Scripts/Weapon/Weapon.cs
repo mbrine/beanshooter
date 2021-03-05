@@ -19,6 +19,10 @@ namespace BeanGame
 		public List<WeaponPart>      weaponParts;
 		public GameItem              weaponBaseItem;
 		public Looks                 weaponLooks;
+		public float cycleTime;
+		public int bulletCount;
+		public bool isHitscan;
+		public float currentCycleTime;
 		public GameProjectileEffect  weaponProjectileEffect;
 		public FiringMode            weaponFiringMode;
 		
@@ -30,7 +34,20 @@ namespace BeanGame
 			var proj = go.AddComponent<GameProjectile>();
 			proj.projectileEffect = weaponProjectileEffect;
 			proj.WakeProjectile();
-			
+
+			currentCycleTime = cycleTime;
+			for (int bulletToFire = 0; bulletToFire < bulletCount; bulletToFire++)
+			{
+				GameObject bullet = new GameObject();
+				Bullet b = bullet.AddComponent<Bullet>();
+				b.BulletDamage = weaponDamage;
+				//b.IsHitscan = isHitscan;
+				b.projectile = bullet.AddComponent<GameProjectile>();
+				b.projectile.projectileEffect = new GameProjectileEffect();
+				b.projectile.projectileEffect.onFireEffect = GameProjectileEffect.OnFired.HITSCAN;
+				b.FireBullet(pos, dir, up, right, weaponSpread, weaponRange);
+			}
+
 		}
 	}
 }
