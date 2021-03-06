@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         {
             if (fireAction.ReadValue<float>() > 0.01f)
             {
-                weapon.Fire(transform.position, transform.forward, transform.up, transform.right);
+                weapon.Fire(transform.position, transform.position, transform.forward, transform.up, transform.right);
             }
         }
 
