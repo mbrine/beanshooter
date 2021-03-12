@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        weapon.currentCycleTime -= Time.deltaTime;
+        weapon.Update();
         if (weapon.currentCycleTime <= 0.0f)
         {
             if (fireAction.ReadValue<float>() > 0.01f)

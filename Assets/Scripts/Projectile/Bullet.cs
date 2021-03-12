@@ -12,14 +12,28 @@ namespace BeanGame
         private float lifeTime = 1.0f;
         private bool IsHitscan = false;
 
-        public void FireBullet(Vector3 pos, Vector3 dir, Vector3 up, Vector3 right, float spread, float range, float spreadAngle = 360.0f, float spreadAngleStart = 0.0f)
+        public void FireBullet(Vector3 pos, Vector3 dir, Vector3 up, Vector3 right,Vector2 recoil, float spread, float range, float spreadAngle = 360.0f, float spreadAngleStart = 0.0f)
         {
             if (!bulletHoleRef)
                 bulletHoleRef = Resources.Load<GameObject>("BulletHolePrefab");
+
+            //Rotate dir by recoil
+            dir = Quaternion.AngleAxis(recoil.x, up) * dir;
+            dir = Quaternion.AngleAxis(-recoil.y, right) * dir;
+            Vector3 tempright = right;
+            right = Quaternion.AngleAxis(recoil.x, up) * right;
+            up = Quaternion.AngleAxis(-recoil.y, right) * up;
+
+
             //Spread
             Polar spreadP = new Polar(Random.Range(0.0f, spread), Random.Range(0.0f, 360.0f));
             Vector2 spreadV = Polar.PolarToVector2(spreadP);
-            Vector3 finalDir = (dir + right * spreadV.x + up * spreadV.y).normalized;
+
+            //Org finalDir
+            //Vector3 finalDir = (dir + right * spreadV.x + up * spreadV.y).normalized;
+
+            Vector3 finalDir = Quaternion.AngleAxis(spreadV.x, up) * dir;
+             finalDir = Quaternion.AngleAxis(spreadV.y, right) * finalDir;
 
             //Decide if using Hitscan
             switch (projectile.projectileEffect.onFireEffect)

@@ -85,7 +85,11 @@ public class PlayerMovement : MonoBehaviour
             groundPos = rch.point;
             //Jump Logic
             if (jumpInput.ReadValue<float>() > 0.01f)
+            {
                 rVel.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                //hvel += moveDir * airAccel;
+                isStayingOnGround = false;
+            }
             Debug.Log("MD:" + moveDir);
             if (isStayingOnGround)
             {
@@ -106,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             hvel += airAccel * moveDir * Time.deltaTime;
-            hvel = Vector3.Lerp(hvel, moveDir * hvel.magnitude, airAccel * _moveInp.magnitude * Time.deltaTime);
+            hvel = Vector3.MoveTowards(hvel, moveDir * hvel.magnitude, airAccel * _moveInp.magnitude * Time.deltaTime*100);
             isStayingOnGround = false;
             vel.y += gravity * Time.deltaTime;
         }
@@ -116,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         rVel += hvel;
         rigidBody.velocity = rVel;
 
-        speedText.text = "SPEED:"+ rigidBody.velocity.magnitude.ToString();
+        speedText.text = "SPEED:"+ hvel.magnitude.ToString();
     }
     void LateUpdate()
     {
@@ -128,13 +132,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGrounded)
             return;
-
-        if (collision.GetContact(collision.contactCount-1).normal.y > 0.3f)
+        Debug.Log(collision.GetContact(collision.contactCount - 1).normal);
+        if (collision.GetContact(collision.contactCount - 1).normal.y > 0.4f)
         {
             cIsGrounded = true;
             floorObject = collision.gameObject;
             Debug.Log("CHANGED FLOOR: " + collision.gameObject);
         }
+        else
+            return;
 
         if (isGrounded && collision.gameObject != floorObject)
         {
