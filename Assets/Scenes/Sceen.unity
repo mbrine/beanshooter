@@ -1052,6 +1052,7 @@ GameObject:
   - component: {fileID: 1411691599}
   - component: {fileID: 1411691598}
   - component: {fileID: 1411691597}
+  - component: {fileID: 1411691600}
   m_Layer: 0
   m_Name: FPSPlayer
   m_TagString: Untagged
@@ -1295,6 +1296,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1411691600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411691591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea56cac12e540de988d585a11e56412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealth: 0
+  currentHealth: 0
+  currentWeapon: {fileID: 0}
+  looksBase: {fileID: 0}
+  looksPart1: {fileID: 0}
+  looksPart2: {fileID: 0}
+  looksPart3: {fileID: 0}
+  looksComponentPart1: {fileID: 0}
+  looksComponentPart2: {fileID: 0}
+  looksComponentPart3: {fileID: 0}
+  statusEffects: []
+  statsIsDirty: 0
+  characterID: 0
+  characterName: 
+  characterActionSkill: 0
+  characterActionSkillActive: 0
 --- !u!1 &1421813823
 GameObject:
   m_ObjectHideFlags: 0
