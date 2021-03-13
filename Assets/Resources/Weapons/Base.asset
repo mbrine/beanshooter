@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a9396d164b41fd84329ef35c85af2e, type: 3}
+  m_Name: Base
+  m_EditorClassIdentifier: 
+  itemName: Name
+  itemRarity: 1
+  itemSprite: {fileID: 0}
+  itemLevel: 1
+  recoilPattern: []
+  weaponSpread: 10
+  weaponRange: 50
+  weaponParts: []
+  weaponLooks: {fileID: 11400000, guid: 6c6f718d491df1844a0b51f11b2ed49d, type: 2}
+  weaponFireRate: 0
+  weaponFireRateTimer: 0
+  weaponPelletCount: 0
+  cycleTime: 0
+  bulletCount: 0
+  isHitscan: 0
+  magazineSize: 0
+  recoilLoopPoint: 0
+  recoilPerShot: 0
+  recoilRecovery: 0
+  recoilAmount: 0
+  recoilCurrent: 0
+  recoilIndex: 0
+  currentRecoil: 0
+  remainingBullets: 0
+  currentCycleTime: -1.4268882
+  weaponProjectileEffect: {fileID: 11400000, guid: 4db2253f023489a408e184e829cebfaf,
+    type: 2}
+  weaponFiringMode: 1
+  weaponTriggerDown: 0
+  weaponIsFreeToFire: 0

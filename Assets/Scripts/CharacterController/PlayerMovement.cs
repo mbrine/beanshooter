@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BeanGame;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(BeanGame.GamePlayerCharacter))]
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rigidBody;
@@ -169,6 +171,23 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         AttemptStep(collision);
+        
+        // CHECK IF WEAPON PICKUP
+        if (collision.gameObject.CompareTag("GroundItem_Weapon"))
+        {
+            // TODO: CHECK INV IF FULL
+            // TODO: CHECK EQUIPPED WEAPS IF ALL ARE USED
+            // TODO: ADD TO INV
+
+            var i = Instantiate(collision.gameObject.GetComponent<GameItemComponentWrapper>().theItem) as Weapon;
+            GetComponent<BeanGame.GamePlayerCharacter>().characterInventory
+                .AddItem(i);
+            // TODO: FIXME: WEAPON IS OVERRIDEN AND DELETED
+            GetComponent<BeanGame.GamePlayerCharacter>().EquipWeapon(0, i);
+            
+            Destroy(collision.gameObject); // THIS CAN ONLY HAPPEN DURING PLAYTIME, NO NEED TO DESTROYIMMEDIATE
+			
+        }
     }
     private void OnCollisionStay(Collision collision)
     {

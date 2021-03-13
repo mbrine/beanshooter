@@ -49,12 +49,6 @@ MonoBehaviour:
   - {x: 0, y: 15}
   weaponSpread: 0
   weaponRange: 100
-  weaponParts: []
-  weaponBaseItem: {fileID: 11400000}
-  weaponLooks: {fileID: 11400000, guid: 3ee89c1776f86804798462aa9cb0bfe1, type: 2}
-  weaponProjectileEffect: {fileID: 0}
-  weaponFiringMode: 1
-  cycleTime: 0.1
   bulletCount: 1
   isHitscan: 1
   magazineSize: 30
@@ -65,4 +59,15 @@ MonoBehaviour:
   recoilIndex: 26
   currentRecoil: 0
   remainingBullets: 0
-  currentCycleTime: 0
+  currentCycleTime: -3.9028904
+  weaponTriggerDown: 0
+  weaponIsFreeToFire: 0
+  weaponParts: []
+  weaponLooks: {fileID: 11400000, guid: 3ee89c1776f86804798462aa9cb0bfe1, type: 2}
+  weaponProjectileEffect: {fileID: 11400000, guid: 5361b5cf3e47cf647b68eba59fa16797,
+    type: 2}
+  weaponFiringMode: 0
+  cycleTime: 0
+  weaponFireRate: 0
+  weaponFireRateTimer: 0
+  weaponPelletCount: 1

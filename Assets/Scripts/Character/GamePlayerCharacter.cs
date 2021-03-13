@@ -20,7 +20,7 @@ namespace BeanGame
 
 		public PlayerInventory                 characterInventory;
 
-		public void EquipWeapon(int slot)
+		public void EquipWeapon(int slot, Weapon w)
 		{
 			// TODO:
 			// CHECK IF SLOT IS NOT EMPTY
@@ -28,6 +28,8 @@ namespace BeanGame
 			// SET THIS GAMECHARACTER'S CURRENT WEAPON TO SLOT
 			// ELSE
 			// RETURN
+			
+			
 		}
 
 	}
