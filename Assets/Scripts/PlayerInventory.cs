@@ -9,12 +9,16 @@ namespace BeanGame
 		public List<GameItem> items
 		{
 			get;
-			private set;
 		}
 
 		public int Count => items.Count;
 		public int Space => inventorySpace - items.Count;
 
+		public Looks equippedVanitySlot1;
+		public Looks equippedVanitySlot2;
+		public Looks equippedVanitySlot3;
+		public Looks equippedVanitySlotOutfit; 
+		
 		public Weapon equippedWeapon1; // DPAD-UP
 		public Weapon equippedWeapon2; // DPAD-LF
 		public Weapon equippedWeapon3; // DPAD-RT

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a9396d164b41fd84329ef35c85af2e, type: 3}
+  m_Name: TEST
+  m_EditorClassIdentifier: 
+  itemName: TESTGUN
+  itemRarity: 1
+  itemSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 3}
+  itemLevel: 1
+  recoilPattern:
+  - {x: 1, y: 0}
+  - {x: 0, y: 1}
+  - {x: 2, y: 0}
+  - {x: 0, y: 2}
+  - {x: 3, y: 0}
+  - {x: 0, y: 3}
+  - {x: 4, y: 0}
+  - {x: 0, y: 4}
+  - {x: 5, y: 0}
+  - {x: 0, y: 5}
+  - {x: 6, y: 0}
+  - {x: 0, y: 6}
+  - {x: 7, y: 0}
+  - {x: 0, y: 7}
+  - {x: 8, y: 0}
+  - {x: 0, y: 8}
+  - {x: 9, y: 0}
+  - {x: 0, y: 9}
+  - {x: 10, y: 0}
+  - {x: 0, y: 10}
+  - {x: 11, y: 0}
+  - {x: 0, y: 11}
+  - {x: 12, y: 0}
+  - {x: 0, y: 12}
+  - {x: 13, y: 0}
+  - {x: 0, y: 13}
+  - {x: 14, y: 0}
+  - {x: 0, y: 14}
+  - {x: 15, y: 0}
+  - {x: 0, y: 15}
+  weaponSpread: 0
+  weaponRange: 100
+  bulletCount: 1
+  isHitscan: 1
+  magazineSize: 30
+  recoilLoopPoint: 0
+  recoilPerShot: 1
+  recoilAmount: 25
+  recoilRecovery: 1
+  recoilIndex: 26
+  currentRecoil: 0
+  remainingBullets: 0
+  currentCycleTime: -3.9028904
+  weaponTriggerDown: 0
+  weaponIsFreeToFire: 0
+  weaponParts: []
+  weaponLooks: {fileID: 11400000, guid: 3ee89c1776f86804798462aa9cb0bfe1, type: 2}
+  weaponProjectileEffect: {fileID: 11400000, guid: 5361b5cf3e47cf647b68eba59fa16797,
+    type: 2}
+  weaponFiringMode: 0
+  cycleTime: 0
+  weaponFireRate: 0
+  weaponFireRateTimer: 0
+  weaponPelletCount: 1

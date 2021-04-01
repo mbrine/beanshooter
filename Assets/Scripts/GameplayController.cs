@@ -14,7 +14,11 @@ namespace BeanGame
 		}
 
 		public static GameplayController Instance =>  _instance ?? (_instance = new GameplayController());
-		
+
+		public static Weapon GenerateWeapon(int iLevel)
+		{
+			return null;
+		}
 		
 	}
 }

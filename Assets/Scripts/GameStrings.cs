@@ -10,10 +10,10 @@ namespace BeanGame
 		private static string   MyGamesFolder => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games");
 		public static string    SavesLocation => Path.Combine(MyGamesFolder, GameName, "Saves");
 
-		public static Dictionary<string, string> someDictionary = new Dictionary<string, string>()
+		public static Dictionary<string, string> GameProjectileEffectDescription = new Dictionary<string, string>()
 		{
 			{"abc", "def"}
 		};
-
+		
 	}
 }

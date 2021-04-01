@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BeanGame;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(BeanGame.GamePlayerCharacter))]
 public class PlayerMovement : MonoBehaviour
 {
-
-    //public CharacterController controller;
-
     public Rigidbody rigidBody;
 
     public float speed = 0.0f;
@@ -26,12 +26,14 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 hvel;
     public Vector3 groundPos;
     public Vector3 vel;
+    public Vector3 lateVel;
     public bool isGrounded;
     public bool cIsGrounded;
     public GameObject floorObject;
 
     public InputAction moveInput;
     public InputAction jumpInput;
+    public Text speedText;
 
     public Vector3 input;
 
@@ -63,85 +65,88 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //controller.
-        //isGrounded = controller.isGrounded;
         RaycastHit rch = new RaycastHit();
         Ray ray = new Ray(groundCheck.position, -transform.up * (groundDist + Mathf.Epsilon));
         Debug.DrawRay(groundCheck.position, -transform.up * (groundDist + Mathf.Epsilon), Color.yellow);
         isGrounded = Physics.Raycast(ray, out rch, groundDist + Mathf.Epsilon);
-        //cIsGrounded = controller.isGrounded;
-        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
         Vector3 _moveInp = new Vector3(moveInput.ReadValue<Vector2>().x, 0.0f, moveInput.ReadValue<Vector2>().y);
         input.x = _moveInp.x;
         input.z = _moveInp.z;
         Vector3 rVel = new Vector3(0, rigidBody.velocity.y, 0);
         hvel = rigidBody.velocity;
+        speed = hvel.magnitude;
         hvel.y = 0.0f;
         Vector3 moveDir = (transform.forward * _moveInp.z + transform.right * _moveInp.x);
-        if (isGrounded && cIsGrounded)
+        Vector3 hMoveDir = moveDir;
+        if (hMoveDir == Vector3.zero)
+            hMoveDir = hvel.normalized;
+
+        if (isGrounded)
         {
             floorObject = rch.collider.gameObject;
             groundPos = rch.point;
             //Jump Logic
             if (jumpInput.ReadValue<float>() > 0.01f)
+            {
                 rVel.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            //else //if (controller.isGrounded)
-            //vel.y = 0.0f;
-
-            //hvel += accel * _moveInp * Time.deltaTime;
-            //hvel += accel * _moveInp * Time.deltaTime;
+                //hvel += moveDir * airAccel;
+                isStayingOnGround = false;
+            }
+            Debug.Log("MD:" + moveDir);
             if (isStayingOnGround)
             {
                 if (hvel.sqrMagnitude > maxSpeed * maxSpeed)
                 {
-                    hvel = Vector3.MoveTowards(hvel, hvel.normalized * maxSpeed, groundFriction + accel);
+                    hvel = Vector3.MoveTowards(hvel, hvel.normalized * maxSpeed, groundFriction + accel*groundFriction);
                 }
                 else
                 {
                     hvel = Vector3.MoveTowards(hvel, Vector3.zero, groundFriction * Time.deltaTime);
                 }
             }
-            hvel = Vector3.MoveTowards(hvel, moveDir * maxSpeed, accel * Time.deltaTime);
+            hvel = Vector3.MoveTowards(hvel, hMoveDir * maxSpeed, accel * moveDir.magnitude * Time.deltaTime);
 
             if (!(jumpInput.ReadValue<float>() > 0.01f))
                 isStayingOnGround = true;
-
-            //speed = hvel.magnitude;
-            //speed += accel * _moveInp.magnitude;
-            ////speed = Mathf.Lerp
-            //if (speed > maxSpeed)
-            //{
-            //    speed = maxSpeed;
-            //}
-            //
-            //hvel = Vector3.Lerp(Vector3.zero, (transform.forward * input.z + transform.right * input.x) * maxSpeed, speed/maxSpeed);
         }
         else
         {
             hvel += airAccel * moveDir * Time.deltaTime;
-            hvel = Vector3.Lerp(hvel, moveDir * hvel.magnitude, airAccel * _moveInp.magnitude * Time.deltaTime);
+            hvel = Vector3.MoveTowards(hvel, moveDir * hvel.magnitude, airAccel * _moveInp.magnitude * Time.deltaTime*100);
             isStayingOnGround = false;
             vel.y += gravity * Time.deltaTime;
         }
 
         Vector3 move = transform.right * input.x + transform.forward * input.z;
 
-        //GetComponent<Rigidbody>().velocity = Vector3.MoveTowards(GetComponent<Rigidbody>().velocity,vel + hvel, Time.deltaTime);
         rVel += hvel;
         rigidBody.velocity = rVel;
+
+        speedText.text = "SPEED:"+ hvel.magnitude.ToString();
+    }
+    void LateUpdate()
+    {
+        lateVel = rigidBody.velocity;
+        cIsGrounded = false;
     }
 
-    private void OnCollisionStay(Collision collision)
+    void AttemptStep(Collision collision)
     {
-        if (collision.GetContact(collision.contactCount-1).normal.y > 0.3f)
+        if (!isGrounded)
+            return;
+        Debug.Log(collision.GetContact(collision.contactCount - 1).normal);
+        if (collision.GetContact(collision.contactCount - 1).normal.y > 0.4f)
         {
             cIsGrounded = true;
             floorObject = collision.gameObject;
+            Debug.Log("CHANGED FLOOR: " + collision.gameObject);
         }
+        else
+            return;
 
         if (isGrounded && collision.gameObject != floorObject)
         {
-            Vector3 rayPos = transform.position + (collision.GetContact(1).point - transform.position).normalized * 1.01f;
+            Vector3 rayPos = transform.position + (collision.GetContact(collision.contactCount-1).point - transform.position).normalized * 1.01f;
             rayPos.y = transform.position.y;
             Ray stepRay = new Ray(rayPos + Vector3.up * 1.0f, Vector3.down);
             float rayDist = 2.0f;
@@ -156,13 +161,36 @@ public class PlayerMovement : MonoBehaviour
                 {
                     transform.position += Vector3.up * height;
                     transform.position = stepHit.point + Vector3.up * 1.0f;
+                    rigidBody.velocity = lateVel;
+                    floorObject = collision.gameObject;
                 }
             }
         }
     }
 
-    private void LateUpdate()
+    private void OnCollisionEnter(Collision collision)
     {
-        cIsGrounded = false;
+        AttemptStep(collision);
+        
+        // CHECK IF WEAPON PICKUP
+        if (collision.gameObject.CompareTag("GroundItem_Weapon"))
+        {
+            // TODO: CHECK INV IF FULL
+            // TODO: CHECK EQUIPPED WEAPS IF ALL ARE USED
+            // TODO: ADD TO INV
+
+            var i = Instantiate(collision.gameObject.GetComponent<GameItemComponentWrapper>().theItem) as Weapon;
+            GetComponent<BeanGame.GamePlayerCharacter>().characterInventory
+                .AddItem(i);
+            // TODO: FIXME: WEAPON IS OVERRIDEN AND DELETED
+            GetComponent<BeanGame.GamePlayerCharacter>().EquipWeapon(0, i);
+            
+            Destroy(collision.gameObject); // THIS CAN ONLY HAPPEN DURING PLAYTIME, NO NEED TO DESTROYIMMEDIATE
+			
+        }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        AttemptStep(collision);
     }
 }

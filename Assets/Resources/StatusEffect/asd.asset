@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 873152408bc14733ae78da28e249317b, type: 3}
+  m_Name: asd
+  m_EditorClassIdentifier: 
+  effectIcon: {fileID: 2800000, guid: 3a93ceac27127fc478b8942c430e6c33, type: 3}
+  effectTitle: Effect Title Here...
+  effectDesc: Effect Title Here...
+  effectDuration: 0
+  effectTimer: 0
+  effectMaxStacks: 0
+  effactCurrentStacks: 0
+  isDebuff: 0
+  timerResetsWhenReapplied: 0
