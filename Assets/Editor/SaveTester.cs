@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class SaveTester : EditorWindow
 {
-	string _characterName = "";
-	private List<string> _listNames = new List<string>();
+	string characterName;
+	private List<string> listNames = new List<string>();
 
 	[MenuItem("Window/My Game/ShowWindow")]
 	public static void Init()
@@ -18,13 +18,13 @@ public class SaveTester : EditorWindow
 	
 	private void OnGUI()
 	{
-		_characterName = GUILayout.TextField(_characterName);
+		characterName = GUILayout.TextField(characterName);
 		if (GUILayout.Button("Save This Char"))
 		{
 			GameObject go = new GameObject("dummy");
 			GamePlayerCharacter c = go.AddComponent<GamePlayerCharacter>();
 			c.characterID = 1;
-			c.characterName = _characterName;
+			c.characterName = characterName;
 			c.BaseHealth = 100;
 			GameSaveLoadHandler.SavePlayerCharacter(c);
 			DestroyImmediate(go);
@@ -39,12 +39,12 @@ public class SaveTester : EditorWindow
 
 		if (GUILayout.Button("Get Char Names"))
 		{
-			_listNames = GameSaveLoadHandler.GetListOfCharacters();
+			listNames = GameSaveLoadHandler.GetListOfCharacters();
 		}
 
-		if (_listNames.Count > 0)
+		if (listNames.Count > 0)
 		{
-			foreach (string a in _listNames)
+			foreach (string a in listNames)
 			{
 				GUILayout.Label(a);	
 			}

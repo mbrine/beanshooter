@@ -17,18 +17,15 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.8f;
     public float groundFriction = 1.0f;
     public float jumpHeight = 2.0f;
-    public float stepHeight = 2.0f;
 
     public Transform groundCheck;
     public float groundDist;
     public LayerMask groundMask;
 
     public Vector3 hvel;
-    public Vector3 groundPos;
     public Vector3 vel;
     public bool isGrounded;
     public bool cIsGrounded;
-    public GameObject floorObject;
 
     public InputAction moveInput;
     public InputAction jumpInput;
@@ -59,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         moveInput.Enable();
         jumpInput.Enable();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -68,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit rch = new RaycastHit();
         Ray ray = new Ray(groundCheck.position, -transform.up * (groundDist + Mathf.Epsilon));
         Debug.DrawRay(groundCheck.position, -transform.up * (groundDist + Mathf.Epsilon), Color.yellow);
-        isGrounded = Physics.Raycast(ray, out rch, groundDist + Mathf.Epsilon);
+        isGrounded = Physics.Raycast(ray,out rch, groundDist + Mathf.Epsilon);
         //cIsGrounded = controller.isGrounded;
         //isGrounded = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
         Vector3 _moveInp = new Vector3(moveInput.ReadValue<Vector2>().x, 0.0f, moveInput.ReadValue<Vector2>().y);
@@ -78,15 +74,13 @@ public class PlayerMovement : MonoBehaviour
         hvel = rigidBody.velocity;
         hvel.y = 0.0f;
         Vector3 moveDir = (transform.forward * _moveInp.z + transform.right * _moveInp.x);
-        if (isGrounded && cIsGrounded)
+        if (isGrounded)
         {
-            floorObject = rch.collider.gameObject;
-            groundPos = rch.point;
             //Jump Logic
             if (jumpInput.ReadValue<float>() > 0.01f)
                 rVel.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             //else //if (controller.isGrounded)
-            //vel.y = 0.0f;
+                //vel.y = 0.0f;
 
             //hvel += accel * _moveInp * Time.deltaTime;
             //hvel += accel * _moveInp * Time.deltaTime;
@@ -129,40 +123,8 @@ public class PlayerMovement : MonoBehaviour
         //GetComponent<Rigidbody>().velocity = Vector3.MoveTowards(GetComponent<Rigidbody>().velocity,vel + hvel, Time.deltaTime);
         rVel += hvel;
         rigidBody.velocity = rVel;
-    }
+        
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.GetContact(collision.contactCount-1).normal.y > 0.3f)
-        {
-            cIsGrounded = true;
-            floorObject = collision.gameObject;
-        }
 
-        if (isGrounded && collision.gameObject != floorObject)
-        {
-            Vector3 rayPos = transform.position + (collision.GetContact(1).point - transform.position).normalized * 1.01f;
-            rayPos.y = transform.position.y;
-            Ray stepRay = new Ray(rayPos + Vector3.up * 1.0f, Vector3.down);
-            float rayDist = 2.0f;
-            Debug.DrawLine(stepRay.origin, stepRay.origin + stepRay.direction * rayDist, Color.yellow, 3.0f);
-            RaycastHit stepHit = new RaycastHit();
-            if (Physics.Raycast(stepRay, out stepHit, rayDist))
-            {
-                if (stepHit.collider.gameObject == floorObject)
-                    return;
-                float height = rayDist - stepHit.distance;
-                if (height < stepHeight)
-                {
-                    transform.position += Vector3.up * height;
-                    transform.position = stepHit.point + Vector3.up * 1.0f;
-                }
-            }
-        }
-    }
-
-    private void LateUpdate()
-    {
-        cIsGrounded = false;
     }
 }
