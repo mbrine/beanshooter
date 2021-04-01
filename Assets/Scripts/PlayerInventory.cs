@@ -3,11 +3,9 @@
 
 namespace BeanGame
 {
-	public class GamePlayerCharacterInventory
+	public class PlayerInventory
 	{
-		public Weapon         weapon;
 		public int            inventorySpace;
-
 		public List<GameItem> items
 		{
 			get;
@@ -17,6 +15,10 @@ namespace BeanGame
 		public int Count => items.Count;
 		public int Space => inventorySpace - items.Count;
 
+		public Weapon equippedWeapon1; // DPAD-UP
+		public Weapon equippedWeapon2; // DPAD-LF
+		public Weapon equippedWeapon3; // DPAD-RT
+		public Weapon equippedWeapon4; // DPAD-DN
 
 		public void AddItem(GameItem i)
 		{
@@ -35,12 +37,27 @@ namespace BeanGame
 			}
 		}
 
-		public void MovItem(GameItem i, int slot)
+		public void MovItem(int slot1, int slot2)
 		{
-			
+			if (items[slot2] != null)
+			{
+				items[slot2] = items[slot1];
+			}
+			else
+			{
+				SwpItem(items[slot1], items[slot2]);
+			}
 		}
 
 		public void SwpItem(GameItem i1, GameItem i2)
+		{
+			GameItem temp;
+			temp = i1;
+			i1 = i2;
+			i2 = temp;
+		}
+
+		public void EquipWeapon(Weapon w, int slot)
 		{
 			
 		}
