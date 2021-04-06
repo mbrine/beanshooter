@@ -17,37 +17,9 @@ MonoBehaviour:
   itemSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 3}
   itemLevel: 1
   recoilPattern:
-  - {x: 1, y: 0}
+  - {x: 0, y: 0}
   - {x: 0, y: 1}
-  - {x: 2, y: 0}
-  - {x: 0, y: 2}
-  - {x: 3, y: 0}
-  - {x: 0, y: 3}
-  - {x: 4, y: 0}
-  - {x: 0, y: 4}
-  - {x: 5, y: 0}
-  - {x: 0, y: 5}
-  - {x: 6, y: 0}
-  - {x: 0, y: 6}
-  - {x: 7, y: 0}
-  - {x: 0, y: 7}
-  - {x: 8, y: 0}
-  - {x: 0, y: 8}
-  - {x: 9, y: 0}
-  - {x: 0, y: 9}
-  - {x: 10, y: 0}
-  - {x: 0, y: 10}
-  - {x: 11, y: 0}
-  - {x: 0, y: 11}
-  - {x: 12, y: 0}
-  - {x: 0, y: 12}
-  - {x: 13, y: 0}
-  - {x: 0, y: 13}
-  - {x: 14, y: 0}
-  - {x: 0, y: 14}
-  - {x: 15, y: 0}
-  - {x: 0, y: 15}
-  weaponSpread: 0
+  weaponSpread: 5
   weaponRange: 100
   weaponParts: []
   weaponBaseItem: {fileID: 11400000}
@@ -58,11 +30,12 @@ MonoBehaviour:
   bulletCount: 1
   isHitscan: 1
   magazineSize: 30
-  recoilLoopPoint: 0
+  recoilLoopPoint: 1
   recoilPerShot: 1
-  recoilAmount: 25
-  recoilRecovery: 1
-  recoilIndex: 26
+  recoilRecovery: 50
+  recoilAmount: 0
+  recoilCurrent: 4.677389
+  recoilIndex: 0
   currentRecoil: 0
   remainingBullets: 0
-  currentCycleTime: 0
+  currentCycleTime: -0.68703705
