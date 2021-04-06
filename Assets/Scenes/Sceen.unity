@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1053,6 +1053,7 @@ GameObject:
   - component: {fileID: 1411691598}
   - component: {fileID: 1411691597}
   - component: {fileID: 1411691600}
+  - component: {fileID: 1411691601}
   m_Layer: 0
   m_Name: FPSPlayer
   m_TagString: Untagged
@@ -1108,27 +1109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9244f6d98eca0724291479c6f60d74f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 1411691595}
-  speed: 12
-  maxSpeed: 15
-  accel: 72
-  airAccel: 3.6
-  gravity: -9.8
-  groundFriction: 48
-  jumpHeight: 2
-  stepHeight: 2
-  groundCheck: {fileID: 326689170}
-  groundDist: 1
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  hvel: {x: 0, y: 0, z: 0}
-  groundPos: {x: 0, y: 0, z: 0}
-  vel: {x: 0, y: 0, z: 0}
-  lateVel: {x: 0, y: 0, z: 0}
-  isGrounded: 0
-  cIsGrounded: 0
-  floorObject: {fileID: 0}
   moveInput:
     m_Name: Move Input
     m_Type: 0
@@ -1324,6 +1304,39 @@ MonoBehaviour:
   characterName: 
   characterActionSkill: 0
   characterActionSkillActive: 0
+--- !u!114 &1411691601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411691591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 427368dd74f9ac9439a00bd0fa6dc9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 1411691595}
+  groundCheck: {fileID: 326689170}
+  groundDist: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  hVel: {x: 0, y: 0, z: 0}
+  groundPos: {x: 0, y: 0, z: 0}
+  vel: {x: 0, y: 0, z: 0}
+  lateVel: {x: 0, y: 0, z: 0}
+  isGrounded: 0
+  cIsGrounded: 0
+  floorObject: {fileID: 0}
+  speed: 0
+  maxSpeed: 12
+  accel: 120
+  airAccel: 12
+  gravity: -9.8
+  groundFriction: 24
+  jumpHeight: 2
+  stepHeight: 2
 --- !u!1 &1421813823
 GameObject:
   m_ObjectHideFlags: 0

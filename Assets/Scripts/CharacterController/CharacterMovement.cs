@@ -56,7 +56,6 @@ public class CharacterMovement : MonoBehaviour
         Vector3 hMoveDir = moveDir;
         if (hMoveDir == Vector3.zero)
             hMoveDir = hVel.normalized;
-
         if (isGrounded)
         {
             floorObject = rch.collider.gameObject;
