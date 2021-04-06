@@ -25,9 +25,14 @@ public class PlayerController : MonoBehaviour
         {
             if (fireAction.ReadValue<float>() > 0.01f)
             {
+                //weapon.weaponTriggerDown = true;
+                weapon.ToggleWeaponTrigger(true);
                 weapon.Fire(transform.position, transform.position, transform.forward, transform.up, transform.right);
             }
+            else
+            {
+                weapon.ToggleWeaponTrigger(false);
+            }
         }
-
     }
 }

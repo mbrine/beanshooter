@@ -9,6 +9,7 @@ namespace BeanGame
 		public enum FiringMode
 		{
 			SEMI,
+			CHARGE, // projectile is fired when trigger up
 			AUTO,
 			BURST_2,
 			BURST_3,
@@ -23,25 +24,31 @@ namespace BeanGame
 		public float                 weaponSpread;
 		public float                 weaponRange;
 		public List<WeaponPart>      weaponParts;
-		public GameItem              weaponBaseItem;
 		public Looks                 weaponLooks;
-		public GameProjectileEffect  weaponProjectileEffect;
-		public FiringMode            weaponFiringMode;
-
+		
+		// NOTE THAT 0 MEANS THAT THE GUN WILL FIRE AS FAST AS THE PLAYER CAN PULL THE TRIGGER (BL2 JAKOBS PISTOL)
+		public float                 weaponFireRate; 
+		
+		public float                 weaponFireRateTimer; // DITTO
+		public int                   weaponPelletCount = 1; // SHOULD DEFAULT TO 1
+		// your (mbrine's) stuff
 		public float                 cycleTime;
 		public int                   bulletCount;
-		public bool                  isHitscan;
         public int                   magazineSize;
         public int                   recoilLoopPoint;
         public float                 recoilPerShot;
         public float                 recoilRecovery;
-
         public float                 recoilAmount;
         public float                 recoilCurrent;
         public int                   recoilIndex = 0;
         public float                 currentRecoil = 0.0f;
         public int                   remainingBullets;
 		public float                 currentCycleTime;
+		// end 
+		public GameProjectileEffect  weaponProjectileEffect;
+		public FiringMode            weaponFiringMode;
+		public bool                  weaponTriggerDown; // MUST BE SET BY THE CONTROLS
+		public bool                  weaponIsFreeToFire;
 		
         public void Init()
         {
@@ -60,14 +67,64 @@ namespace BeanGame
                 recoilIndex = 0;
         }
 
+        /// <summary>
+        ///   <para>Meant to simulate a weapon's trigger.</para>
+        /// </summary>
+        /// <remarks>true - Weapon's trigger is pressed/held down.
+        /// false - Weapon's trigger is released.</remarks>
+        public void ToggleWeaponTrigger(bool triggerState)
+        {
+	        weaponTriggerDown = triggerState;
+	        switch (weaponFiringMode)
+	        {
+		        case FiringMode.SEMI:
+		        {
+			        if (triggerState)
+			        {
+				        if (weaponIsFreeToFire)
+				        {
+					        // FIRE PROJECTILES
+					        // TODO: CALL FIRE METHOD HERE
+					        weaponIsFreeToFire = false;
+				        }
+			        }
+			        break;
+		        }
+		        case FiringMode.CHARGE:
+		        {
+			        if (triggerState)
+			        {
+				        
+			        }
+			        else
+			        {
+				        // this is where a charge shot projectile should Fire
+			        }
+			        break;
+		        }
+		        case FiringMode.AUTO:
+		        {
+			        if (triggerState)
+			        {
+				        
+			        }
+			        break;
+		        }
+				
+				
+	        }
+        }
+
 		public void Fire(Vector3 startPosition , Vector3 pos, Vector3 dir, Vector3 up, Vector3 right)
 		{
-            // TODO: OBJECT POOLING SPECIFICALLY FOR PROJECTILES
+			
 
-            //GameObject go = new GameObject("Projectile");
-            //var proj = go.AddComponent<GameProjectile>();
-            //proj.projectileEffect = weaponProjectileEffect;
-            //proj.WakeProjectile();
+			// TODO: OBJECT POOLING SPECIFICALLY FOR PROJECTILES
+
+			//GameObject go = new GameObject("Projectile");
+			//var proj = go.AddComponent<GameProjectile>();
+			//proj.projectileEffect = weaponProjectileEffect;
+			//proj.WakeProjectile();
 
             if (recoilIndex >= recoilPattern.Count)
             {
@@ -83,7 +140,7 @@ namespace BeanGame
 				Bullet b = bullet.AddComponent<Bullet>();
 				b.BulletDamage = weaponDamage;
 				b.projectile = bullet.AddComponent<GameProjectile>();
-				b.projectile.projectileEffect = new GameProjectileEffect();
+				b.projectile.projectileEffect = weaponProjectileEffect;
 				b.projectile.projectileEffect.onFireEffect = GameProjectileEffect.OnFired.HITSCAN;
 				b.FireBullet(pos, dir, up, right, recoilPos, weaponSpread, weaponRange);
 			}

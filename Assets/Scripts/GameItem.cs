@@ -39,6 +39,5 @@ namespace BeanGame
 
 		public Sprite       itemSprite;
 		public int          itemLevel; // THIS IS NOT THE SAME AS WEAPON/ARMOR LEVEL
-		
 	}
 }

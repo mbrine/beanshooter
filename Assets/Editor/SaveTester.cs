@@ -75,7 +75,19 @@ public class SaveTester : EditorWindow
 				{
 					Selection.activeGameObject.GetComponent<GameCharacter>().ApplyLooks();
 				}
-			}	
+			}
+
+			if (Selection.activeGameObject.GetComponent<GameItemComponentWrapper>() != null)
+			{
+				if (GUILayout.Button("PREPARE ITEM"))
+				{
+					Selection.activeGameObject.GetComponent<GameItemComponentWrapper>().InitItem();
+				}
+				if (GUILayout.Button("DO LOOKS"))
+				{
+					Selection.activeGameObject.GetComponent<GameItemComponentWrapper>().ApplyLooks();
+				}
+			}
 		}
 	}
 }

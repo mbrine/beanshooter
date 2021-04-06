@@ -34,15 +34,15 @@ namespace BeanGame
 		public bool statsIsDirty = false;
 
 		#region events
-	
-		public delegate void d_characterDeath(GameCharacter c);
-		public event d_characterDeath OnCharacterDeath; // will be triggered on entity death.
 
 		public delegate void d_characterTookDamage(GameCharacter c, Damage d);
-		public event d_characterTookDamage OnCharacterTakeDamage;
-
-		// will be triggered when the character has an effect applied to them
+		public delegate void d_characterDeath(GameCharacter c);
 		public delegate void d_characterEffectAffectedBy(GameCharacter c, StatusEffect se);
+		// will be triggered on entity death.
+		public event d_characterDeath OnCharacterDeath; 
+		// will be triggered when character takes any form of damage
+		public event d_characterTookDamage OnCharacterTakeDamage;
+		// will be triggered when the character has an effect applied to them
 		public event d_characterEffectAffectedBy OnCharacterHasEffectAffectedBy; 
 		
 		#endregion
@@ -147,10 +147,14 @@ namespace BeanGame
 				}
 			}
 		}
+		
+		
 
 		public void ApplyEffect(StatusEffect se)
 		{
 			// TODO:
+
+			OnCharacterHasEffectAffectedBy?.Invoke(this, se);
 		}
 
 		public void TakeDamage(Damage d)
@@ -168,6 +172,13 @@ namespace BeanGame
 				willDie = true;
 			}
 		}
+
+		public void EquipWeapon(Weapon w)
+		{
+			currentWeapon = w;
+
+		}
+		
 
 		public void Update()
 		{
@@ -191,12 +202,12 @@ namespace BeanGame
 			}
 		}
 
-		// public void OnCollisionEnter(Collision other)
-		// {
-		// 	// CHECK BULLET
-		// 	// IF BULLET
-		// 	//		TakeDamage(other.GetComponent<GameProjectile>().Damage);
-		// }
+		//public void OnCollisionEnter(Collision other)
+		//{
+		//	// CHECK BULLET
+		//	// IF BULLET
+		//	//		TakeDamage(other.GetComponent<GameProjectile>().Damage);
+		//}
 		
 		
 	}

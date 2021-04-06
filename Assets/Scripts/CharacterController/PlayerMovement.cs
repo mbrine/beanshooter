@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BeanGame;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(BeanGame.GamePlayerCharacter))]
 public class PlayerMovement : MonoBehaviour
 {
     public InputAction moveInput;
@@ -35,4 +37,50 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    void AttemptStep(Collision collision)
+    {
+        if (!isGrounded)
+            return;
+        Debug.Log(collision.GetContact(collision.contactCount - 1).normal);
+        if (collision.GetContact(collision.contactCount - 1).normal.y > 0.4f)
+        {
+            cIsGrounded = true;
+            floorObject = collision.gameObject;
+            Debug.Log("CHANGED FLOOR: " + collision.gameObject);
+        }
+        else
+            return;
+
+        if (isGrounded && collision.gameObject != floorObject)
+        {
+            Vector3 rayPos = transform.position + (collision.GetContact(collision.contactCount-1).point - transform.position).normalized * 1.01f;
+            rayPos.y = transform.position.y;
+            Ray stepRay = new Ray(rayPos + Vector3.up * 1.0f, Vector3.down);
+            float rayDist = 2.0f;
+            Debug.DrawLine(stepRay.origin, stepRay.origin + stepRay.direction * rayDist, Color.yellow, 3.0f);
+            RaycastHit stepHit = new RaycastHit();
+            if (Physics.Raycast(stepRay, out stepHit, rayDist))
+            {
+                if (stepHit.collider.gameObject == floorObject)
+                    return;
+                float height = rayDist - stepHit.distance;
+                if (height < stepHeight)
+                {
+                    transform.position += Vector3.up * height;
+                    transform.position = stepHit.point + Vector3.up * 1.0f;
+                    rigidBody.velocity = lateVel;
+                    floorObject = collision.gameObject;
+                }
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        AttemptStep(collision);
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        AttemptStep(collision);
+    }
 }
