@@ -59,7 +59,14 @@ namespace BeanGame
                     LR.SetPosition(0, pos);
                     LR.SetPosition(1, hit.point);
                     Instantiate(bulletHoleRef).transform.position = hit.point;
-                    hit.collider.SendMessage("Damage", BulletDamage);
+                    try
+                    {
+                        hit.collider.SendMessage("Damage", BulletDamage);
+                    }
+                    catch
+                    {
+
+                    }
                 }
                 else
                 {
