@@ -14,7 +14,7 @@ namespace BeanGame
 				NORMAL,
 				UNCOMMON,
 				RARE,
-				VERYRARE,
+				VERY_RARE,
 				LEGENDARY,
 			}
 
@@ -24,7 +24,7 @@ namespace BeanGame
 				{Level.NORMAL,           new Color(0.73f, 0.73f, 0.73f)},
 				{Level.UNCOMMON,         new Color(0.00f, 1.00f, 0.00f)},
 				{Level.RARE,             new Color(0.00f, 0.00f, 1.00f)},
-				{Level.VERYRARE,         new Color(0.80f, 0.00f, 0.60f)},
+				{Level.VERY_RARE,        new Color(0.80f, 0.00f, 0.60f)},
 				{Level.LEGENDARY,        new Color(1.00f, 0.60f, 0.00f)},
 			};
 			
